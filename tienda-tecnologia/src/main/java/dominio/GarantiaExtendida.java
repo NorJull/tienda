@@ -45,4 +45,25 @@ public class GarantiaExtendida {
         return nombreCliente;
     }
 
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+
+	public void setFechaSolicitudGarantia(Date fechaSolicitudGarantia) {
+		this.fechaSolicitudGarantia = fechaSolicitudGarantia;
+	}
+
+	public void setFechaFinGarantia(Date fechaFinGarantia) {
+		this.fechaFinGarantia = fechaFinGarantia;
+	}
+
+	public void setPrecioGarantia(double precioGarantia) {
+		this.precioGarantia = precioGarantia;
+	}
+
+	public void setNombreCliente(String nombreCliente) {
+		this.nombreCliente = nombreCliente;
+	}
+    
+
 }

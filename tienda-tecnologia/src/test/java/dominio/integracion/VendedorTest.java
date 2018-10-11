@@ -18,6 +18,8 @@ import testdatabuilder.ProductoTestDataBuilder;
 public class VendedorTest {
 
 	private static final String COMPUTADOR_LENOVO = "Computador Lenovo";
+	private static final String CODIGO_CON_TRES_VOCALES = "NAREEN123";
+	private static final String NOMBRE_CLIENTE = "Naren";
 	
 	private SistemaDePersistencia sistemaPersistencia;
 	
@@ -50,7 +52,7 @@ public class VendedorTest {
 		Vendedor vendedor = new Vendedor(repositorioProducto, repositorioGarantia);
 
 		// act
-		vendedor.generarGarantia(producto.getCodigo());
+		vendedor.generarGarantia(producto.getCodigo(), NOMBRE_CLIENTE);
 
 		// assert
 		Assert.assertTrue(vendedor.tieneGarantia(producto.getCodigo()));
@@ -69,10 +71,10 @@ public class VendedorTest {
 		Vendedor vendedor = new Vendedor(repositorioProducto, repositorioGarantia);
 
 		// act
-		vendedor.generarGarantia(producto.getCodigo());;
+		vendedor.generarGarantia(producto.getCodigo(),NOMBRE_CLIENTE);
 		try {
 			
-			vendedor.generarGarantia(producto.getCodigo());
+			vendedor.generarGarantia(producto.getCodigo(),NOMBRE_CLIENTE);
 			fail();
 			
 		} catch (GarantiaExtendidaException e) {
@@ -80,4 +82,17 @@ public class VendedorTest {
 			Assert.assertEquals(Vendedor.EL_PRODUCTO_TIENE_GARANTIA, e.getMessage());
 		}
 	}
+	
+	//Test : Regla del negocio #3
+	@Test(expected = GarantiaExtendidaException.class)
+	public void codigoProductoTresVocalesTest() {
+		
+		Producto producto = new ProductoTestDataBuilder().conCodigo(CODIGO_CON_TRES_VOCALES).build();
+		
+		Vendedor vendedor = new Vendedor(repositorioProducto, repositorioGarantia);
+		
+		vendedor.generarGarantia(producto.getCodigo(),NOMBRE_CLIENTE);
+	}
+	
+	
 }
